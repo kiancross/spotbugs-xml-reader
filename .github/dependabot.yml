@@ -1,0 +1,16 @@
+#
+# (c) 2021 Kian Cross
+#
+
+version: 2
+
+updates:
+  - package-ecosystem: gradle
+    directory: /app
+    schedule:
+      interval: daily
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily

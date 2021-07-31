@@ -1,0 +1,59 @@
+/*
+ * Copyright (C) 2021 Kian Cross
+ */
+
+plugins {
+  id "application"
+  id "jacoco"
+  id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "commons-cli:commons-cli:1.4"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+}
+
+application {
+  mainClass = "com.kiancross.spotbugsxmlreader.App"
+}
+
+jacocoTestReport {
+  dependsOn test 
+  reports {
+    xml.enabled true
+    html.enabled true
+  }
+}
+
+def version = rootProject.file("config/version.txt").text.trim()
+
+shadowJar {
+  minimize()
+  archiveBaseName.set(project.name)
+  archiveClassifier.set("")
+  archiveVersion.set(version)
+}
+
+tasks.register("createProperties", Copy) {
+  from "config/version.txt"
+  into layout.buildDirectory.dir("resources/main")
+}
+
+classes {
+  dependsOn createProperties
+}
+
+tasks.named("test") {
+  useJUnitPlatform()
+  finalizedBy jacocoTestReport
+}
+
+tasks.withType(AbstractArchiveTask) {
+  preserveFileTimestamps = false
+  reproducibleFileOrder = true
+}
