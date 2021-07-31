@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2021 Kian Cross
+ */
+
+plugins {
+  id "application"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "commons-cli:commons-cli:1.4"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+}
+
+application {
+  mainClass = "com.kiancross.spotbugsxmlreader.App"
+}
+
+tasks.named("test") {
+  useJUnitPlatform()
+}

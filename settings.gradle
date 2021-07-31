@@ -1,0 +1,6 @@
+/*
+ * Copyright 2021 (C) Kian Cross
+ */
+
+rootProject.name = "spotbugs-xml-reader"
+include("app")
