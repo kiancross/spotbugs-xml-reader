@@ -5,32 +5,34 @@
 package com.kiancross.spotbugsxmlreader;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.XMLConstants;
-
 import org.xml.sax.SAXException;
 
 public class Parser {
   private Element root;
   private String[] sourceDirectories;
 
+  /**
+   * Construct a parser from an {@link InputStream}.
+   *
+   * @param input An {@link InputStream} containing XML.
+   *
+   * @throws ParserException Thrown if there is a syntax error in the XML.
+   */
   public Parser(InputStream input) throws ParserException {
     Document document = getDocument(input);
     root = document.getDocumentElement();
@@ -39,12 +41,30 @@ public class Parser {
     sourceDirectories = getSourceDirectories(project);
   }
 
+  /**
+   * Construct a parser from a file path.
+   *
+   * @param path Path to XML file.
+   *
+   * @return The parser instance.
+   *
+   * @throws FileNotFoundException Thrown if the given file path does not exist.
+   *
+   * @throws ParserException Thrown if there is a syntax error in the given XML file.
+   */
   public static Parser fromFilePath(String path) throws FileNotFoundException, ParserException {
     File file = new File(path);
     InputStream stream = new FileInputStream(file);
     return new Parser(stream);
   }
 
+  /**
+   * Get all bug instances from the parsed XML file.
+   *
+   * @return List of {@link BugInstance} from the XML file.
+   *
+   * @throws ParserException Thrown if there are any semantic erorrs in the XML file.
+   */
   public List<BugInstance> getBugInstances() throws ParserException {
     List<Element> elements = getElementsByTagName(root, "BugInstance");
 
@@ -137,7 +157,9 @@ public class Parser {
     List<Element> sourceElements = getElementsByTagName(project, "SrcDir");
 
     if (sourceElements.size() == 0) {
-      throw new ParserException("XML document should contain at least a single `SrcDir` node inside `Project`.");
+      throw new ParserException(
+          "XML document should contain at least a single `SrcDir` node inside `Project`."
+      );
     }
 
     return sourceElements;
@@ -153,7 +175,9 @@ public class Parser {
     return elements.get(0);
   }
   
-  private List<Element> getElementsByTagName(Element parent, String tagName) throws ParserException {
+  private List<Element> getElementsByTagName(Element parent, String tagName) throws
+      ParserException {
+
     Node child = parent.getFirstChild();
     List<Element> elements = new ArrayList<Element>();
    

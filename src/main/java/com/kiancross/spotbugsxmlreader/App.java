@@ -4,12 +4,15 @@
 
 package com.kiancross.spotbugsxmlreader;
 
-import java.util.List;
-import java.io.InputStream;
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
+/**
+ * Entry class to application.
+ */
 public class App {
   private static boolean printBugInstances(List<BugInstance> instances, int severityThreshold) {
     boolean error = false;
@@ -25,6 +28,8 @@ public class App {
   private static String getVersion() throws IOException {
     InputStream versionStream = App.class.getClassLoader().getResourceAsStream("version.txt");
 
+    // If (for whatever reason) the version.txt file does
+    // not exist, we fall back gracefully to 'unknown'.
     String version = "unknown";
 
     if (versionStream != null) {
@@ -47,7 +52,9 @@ public class App {
     return false;
   }
 
-  private static boolean handleMainProgramme(CommandLineInterface cli) throws CommandLineInterfaceException, ParserException {
+  private static boolean handleMainProgramme(CommandLineInterface cli) throws
+      CommandLineInterfaceException, ParserException {
+
     try {
       Parser parser = Parser.fromFilePath(cli.getReportPath());
 
@@ -61,6 +68,11 @@ public class App {
     }
   }
 
+  /**
+   * Entry function to application.
+   *
+   * @param args Arguments passed from command line.
+   */
   public static void main(String[] args) {
     CommandLineInterface cli = new CommandLineInterface();
 

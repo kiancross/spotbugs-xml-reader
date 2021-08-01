@@ -37,6 +37,13 @@ public class BugInstance {
     this.priority = priority;
   }
 
+  /**
+   * Get a log file entry representing the bug instance. 
+   *
+   * @param thresholdSeverity The severity threshold to use for error/warning tags.
+   *
+   * @return The log file entry.
+   */
   public String getLogEntry(int thresholdSeverity) {
     return String.format(
       "(%s) %s [%s] %s",

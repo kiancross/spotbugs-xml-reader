@@ -100,3 +100,43 @@ jobs:
           ./gradlew --stop
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
+
+
+  checkstyle:
+    name: Checkstyle (${{ matrix.set }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        set: [main, test]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 11
+
+      - uses: kiancross/checkstyle-annotations-action@v1
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Checkstyle 👠
+        run: ./gradlew checkstyle${{ matrix.set }}
+
+      - name: Cleanup Gradle Cache
+        shell: bash
+        run: |
+          ./gradlew --stop
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
