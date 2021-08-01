@@ -4,12 +4,13 @@
 
 package com.kiancross.spotbugsxmlreader;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import org.junit.jupiter.api.Test;
 
 class ParserTest {
   private InputStream getTestInputStream(String data) {
@@ -30,7 +31,9 @@ class ParserTest {
   
   @Test void duplicateBugCollectionThrows() {
     assertThrows(ParserException.class, () -> {
-      new Parser(getTestInputStream("<BugCollection></BugCollection> <BugCollection></BugCollection>"));
+      new Parser(getTestInputStream(
+        "<BugCollection></BugCollection> <BugCollection></BugCollection>"
+      ));
     });
   }
   
@@ -42,25 +45,33 @@ class ParserTest {
   
   @Test void duplicateProjectThrows() {
     assertThrows(ParserException.class, () -> {
-      new Parser(getTestInputStream("<BugCollection><Project></Project> <Project></Project></BugCollection>"));
+      new Parser(getTestInputStream(
+        "<BugCollection><Project></Project> <Project></Project></BugCollection>"
+      ));
     });
   }
   
   @Test void nonExistantSourcesThrows() {
     assertThrows(ParserException.class, () -> {
-      new Parser(getTestInputStream("<BugCollection><Project> <foo></foo> </Project></BugCollection>"));
+      new Parser(getTestInputStream(
+        "<BugCollection><Project> <foo></foo> </Project></BugCollection>"
+      ));
     });
   }
   
   @Test void singleSourcesValid() {
     assertDoesNotThrow(() -> {
-      new Parser(getTestInputStream("<BugCollection><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"));
+      new Parser(getTestInputStream(
+        "<BugCollection><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"
+      ));
     });
   }
   
   @Test void doubleSourcesValid() {
     assertDoesNotThrow(() -> {
-      new Parser(getTestInputStream("<BugCollection><Project> <SrcDir>foo</SrcDir> <SrcDir></SrcDir> </Project></BugCollection>"));
+      new Parser(getTestInputStream(
+        "<BugCollection><Project> <SrcDir>foo</SrcDir> <SrcDir></SrcDir> </Project></BugCollection>"
+      ));
     });
   }
 }
