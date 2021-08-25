@@ -87,7 +87,7 @@ jobs:
         run: ./gradlew test
       
       - name: Upload Coverage Report 📤
-        uses: codecov/codecov-action@v2.0.2
+        uses: codecov/codecov-action@v2.0.3
         env:
           JAVA_VERSION: ${{ matrix.java }}
         with:
