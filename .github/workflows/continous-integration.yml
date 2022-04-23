@@ -43,7 +43,7 @@ jobs:
         run: ./gradlew shadowJar
 
       - name: Upload Package 📤
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: matrix.java == '11'
         with:
           name: packaged-jar
