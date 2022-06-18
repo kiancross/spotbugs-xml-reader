@@ -16,10 +16,19 @@ public class CommandLineInterface {
     
   private static final int defaultErrorThreshold = 2;
   private CommandLine commandLine;
-  private Options options;
+  private Options primaryOptions;
+  private Options secondaryOptions;
 
+  /**
+   * Initialise a command line interface capable of parsing `args`.
+   */
   public CommandLineInterface() {
-    options = getOptions();
+    primaryOptions = getPrimaryOptions();
+    secondaryOptions = getSecondaryOptions();
+
+    for (Option option : primaryOptions.getOptions()) {
+      secondaryOptions.addOption(option);
+    }
   }
 
   /**
@@ -34,7 +43,13 @@ public class CommandLineInterface {
     CommandLineParser parser = new DefaultParser();
 
     try {
-      commandLine = parser.parse(options, args);
+      commandLine = parser.parse(primaryOptions, args, true);
+
+      if (commandLine.getOptions().length > 0) {
+        return;
+      }
+
+      commandLine = parser.parse(secondaryOptions, args);
 
     } catch (ParseException e) {
       throw new CommandLineInterfaceException(e.getMessage());
@@ -52,7 +67,7 @@ public class CommandLineInterface {
     String footer = "\n\nPlease report issues at "
                     + "https://github.com/kiancross/spotbugs-xml-reader/issues";
 
-    formatter.printHelp("spotbugs-xml-reader", header, options, footer, true);
+    formatter.printHelp("spotbugs-xml-reader", header, secondaryOptions, footer, true);
   }
 
   public boolean shouldDisplayHelp() {
@@ -93,7 +108,23 @@ public class CommandLineInterface {
     return commandLine.getOptionValue("f");
   }
 
-  private Options getOptions() {
+  private Options getPrimaryOptions() {
+    Options options = new Options();
+
+    options.addOption(Option.builder("h")
+        .longOpt("help")
+        .desc("Display this help information.")
+        .build());
+
+    options.addOption(Option.builder("v")
+        .longOpt("version")
+        .desc("Display the version number.")
+        .build());
+
+    return options;
+  }
+
+  private Options getSecondaryOptions() {
     Options options = new Options();
 
     options.addOption(Option.builder("f")
@@ -114,16 +145,6 @@ public class CommandLineInterface {
                 + "Default: %d. Note that 1 is most severe and 3 is least severe.",
                 defaultErrorThreshold
         )).build());
-
-    options.addOption(Option.builder("h")
-        .longOpt("help")
-        .desc("Display this help information.")
-        .build());
-    
-    options.addOption(Option.builder("v")
-        .longOpt("version")
-        .desc("Display the version number.")
-        .build());
 
     return options;
   }
