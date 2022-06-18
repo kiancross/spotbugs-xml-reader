@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.3.0" sequence="0" timestamp="1627215205726" analysisTimestamp="1627215205727" release="unspecified">
+  <Project projectName="mandelbrot (spotbugsMain)">
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/typedtextfield/IntegerTextField.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/typedtextfield/TypedTextField.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/typedtextfield/InvalidValueException.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/typedtextfield/DoubleTextField.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/typedtextfield/Validator.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageConfigurationManager.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/Bound.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageConfigurationSaveException.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageConfigurationLoadException.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/View.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageConfiguration$Builder.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/InformInitialObjectProperty.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageGenerator.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/MandelbrotSetIterationCountGenerator$1.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/SerializableColor.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ImageConfiguration.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/HistogramColorMapper.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ComplexNumber.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/Main.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/ColorGradient.class</Jar>
+    <Jar>/mandelbrot/build/classes/java/main/com/kiancross/mandelbrot/MandelbrotSetIterationCountGenerator.class</Jar>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/11.0.2/cb57db3e5bd1e2b62b17c8a504858bfc26fa54b1/javafx-swing-11.0.2-linux.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/11.0.2/5f6929050a744aab39ebfc1e8e5dd03bcd2ad47b/javafx-controls-11.0.2-linux.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/ef4c34f0ca77cd99100b76c2ccf1dce383572bb1/javafx-graphics-11.0.2-linux.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/e522eb4ea422eceeee207b1c266ba3db19b2343a/javafx-graphics-11.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/8db178adb1085d455e5ef643a48c34959c8771c1/javafx-base-11.0.2-linux.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-base/11.0.2/7fb2e4a8528ec9e434a9ac9ee98b39af79e6dcb8/javafx-base-11.0.2.jar</AuxClasspathEntry>
+    <SrcDir>/mandelbrot/src/main/resources</SrcDir>
+    <SrcDir>/mandelbrot/src/main/java</SrcDir>
+  </Project>
+
+
+
+
+
+  <BugInstance type="EI_EXPOSE_REP2" priority="2" rank="18" abbrev="EI2" category="MALICIOUS_CODE" instanceHash="4b05ecc0836c45a5fc0fd00c04cc7157" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by incorporating reference to mutable object</ShortMessage>
+    <LongMessage>new com.kiancross.mandelbrot.HistogramColorMapper(int, ColorGradient) may expose internal representation by storing an externally mutable object into HistogramColorMapper.gradient</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.HistogramColorMapper" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.HistogramColorMapper" start="33" end="125" sourcefile="HistogramColorMapper.java" sourcepath="com/kiancross/mandelbrot/HistogramColorMapper.java" relSourcepath="java/com/kiancross/mandelbrot/HistogramColorMapper.java">
+        <Message>At HistogramColorMapper.java:[lines 33-125]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.HistogramColorMapper</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.HistogramColorMapper" name="&lt;init&gt;" signature="(ILcom/kiancross/mandelbrot/ColorGradient;)V" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.HistogramColorMapper" start="33" end="36" startBytecode="0" endBytecode="88" sourcefile="HistogramColorMapper.java" sourcepath="com/kiancross/mandelbrot/HistogramColorMapper.java" relSourcepath="java/com/kiancross/mandelbrot/HistogramColorMapper.java"/>
+      <Message>In method new com.kiancross.mandelbrot.HistogramColorMapper(int, ColorGradient)</Message>
+    </Method>
+    <Field classname="com.kiancross.mandelbrot.HistogramColorMapper" name="gradient" signature="Lcom/kiancross/mandelbrot/ColorGradient;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.HistogramColorMapper" sourcefile="HistogramColorMapper.java" sourcepath="com/kiancross/mandelbrot/HistogramColorMapper.java" relSourcepath="java/com/kiancross/mandelbrot/HistogramColorMapper.java">
+        <Message>In HistogramColorMapper.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.mandelbrot.HistogramColorMapper.gradient</Message>
+    </Field>
+    <LocalVariable name="gradient" register="2" pc="11" role="LOCAL_VARIABLE_NAMED">
+      <Message>Local variable named gradient</Message>
+    </LocalVariable>
+    <SourceLine classname="com.kiancross.mandelbrot.HistogramColorMapper" primary="true" start="35" end="35" startBytecode="11" endBytecode="11" sourcefile="HistogramColorMapper.java" sourcepath="com/kiancross/mandelbrot/HistogramColorMapper.java" relSourcepath="java/com/kiancross/mandelbrot/HistogramColorMapper.java">
+      <Message>At HistogramColorMapper.java:[line 35]</Message>
+    </SourceLine>
+  </BugInstance>
+
+
+
+  <BugInstance type="EI_EXPOSE_REP" priority="2" rank="18" abbrev="EI" category="MALICIOUS_CODE" instanceHash="ba63c615b4a81d78a207eb4b9569560e" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by returning reference to mutable object</ShortMessage>
+    <LongMessage>com.kiancross.mandelbrot.ImageConfiguration.getColorTheme() may expose internal representation by returning ImageConfiguration.colorTheme</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="171" end="257" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>At ImageConfiguration.java:[lines 171-257]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.ImageConfiguration</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.ImageConfiguration" name="getColorTheme" signature="()Lcom/kiancross/mandelbrot/ColorGradient;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="223" end="223" startBytecode="0" endBytecode="46" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java"/>
+      <Message>In method com.kiancross.mandelbrot.ImageConfiguration.getColorTheme()</Message>
+    </Method>
+    <Field classname="com.kiancross.mandelbrot.ImageConfiguration" name="colorTheme" signature="Lcom/kiancross/mandelbrot/ColorGradient;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>In ImageConfiguration.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.mandelbrot.ImageConfiguration.colorTheme</Message>
+    </Field>
+    <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true" start="223" end="223" startBytecode="4" endBytecode="4" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+      <Message>At ImageConfiguration.java:[line 223]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="ICAST_BAD_SHIFT_AMOUNT" priority="2" rank="3" abbrev="BSHIFT" category="CORRECTNESS" instanceHash="3031fc12b8f497007eff58f835a43631" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>32 bit int shifted by an amount not in the range -31..31</ShortMessage>
+    <LongMessage>32 bit int shifted by 32 bits in com.kiancross.mandelbrot.ImageConfiguration.hashCode()</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="171" end="257" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>At ImageConfiguration.java:[lines 171-257]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.ImageConfiguration</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.ImageConfiguration" name="hashCode" signature="()I" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="247" end="257" startBytecode="0" endBytecode="212" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java"/>
+      <Message>In method com.kiancross.mandelbrot.ImageConfiguration.hashCode()</Message>
+    </Method>
+    <Int value="32" role="INT_SHIFT">
+      <Message>Shifted by 32 bits</Message>
+    </Int>
+    <Field classname="com.kiancross.mandelbrot.ImageConfiguration" name="maximumIterations" signature="I" isStatic="false" primary="true" role="FIELD_VALUE_OF">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>In ImageConfiguration.java</Message>
+      </SourceLine>
+      <Message>Value loaded from field com.kiancross.mandelbrot.ImageConfiguration.maximumIterations</Message>
+    </Field>
+    <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true" start="253" end="253" startBytecode="51" endBytecode="51" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+      <Message>At ImageConfiguration.java:[line 253]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SA_FIELD_SELF_COMPUTATION" priority="2" rank="7" abbrev="SA" category="CORRECTNESS" instanceHash="93a34d21c299ae8c1c3ba9a87cc53d5b" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Nonsensical self computation involving a field (e.g., x &amp; x)</ShortMessage>
+    <LongMessage>Nonsensical self computation of ImageConfiguration.maximumIterations with itself in com.kiancross.mandelbrot.ImageConfiguration.hashCode()</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="171" end="257" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>At ImageConfiguration.java:[lines 171-257]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.ImageConfiguration</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.ImageConfiguration" name="hashCode" signature="()I" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" start="247" end="257" startBytecode="0" endBytecode="212" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java"/>
+      <Message>In method com.kiancross.mandelbrot.ImageConfiguration.hashCode()</Message>
+    </Method>
+    <Field classname="com.kiancross.mandelbrot.ImageConfiguration" name="maximumIterations" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>In ImageConfiguration.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.mandelbrot.ImageConfiguration.maximumIterations</Message>
+    </Field>
+    <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration" primary="true" start="253" end="253" startBytecode="52" endBytecode="52" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+      <Message>At ImageConfiguration.java:[line 253]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="EI_EXPOSE_REP2" priority="2" rank="18" abbrev="EI2" category="MALICIOUS_CODE" instanceHash="7703d998ca11d13d1386f05fff8bd23a" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by incorporating reference to mutable object</ShortMessage>
+    <LongMessage>com.kiancross.mandelbrot.ImageConfiguration$Builder.colorTheme(ColorGradient) may expose internal representation by storing an externally mutable object into ImageConfiguration$Builder.colorTheme</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" start="46" end="152" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>At ImageConfiguration.java:[lines 46-152]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.ImageConfiguration$Builder</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" name="colorTheme" signature="(Lcom/kiancross/mandelbrot/ColorGradient;)Lcom/kiancross/mandelbrot/ImageConfiguration$Builder;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" start="142" end="143" startBytecode="0" endBytecode="62" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java"/>
+      <Message>In method com.kiancross.mandelbrot.ImageConfiguration$Builder.colorTheme(ColorGradient)</Message>
+    </Method>
+    <Field classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" name="colorTheme" signature="Lcom/kiancross/mandelbrot/ColorGradient;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+        <Message>In ImageConfiguration.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.mandelbrot.ImageConfiguration$Builder.colorTheme</Message>
+    </Field>
+    <LocalVariable name="colorTheme" register="1" pc="2" role="LOCAL_VARIABLE_NAMED">
+      <Message>Local variable named colorTheme</Message>
+    </LocalVariable>
+    <SourceLine classname="com.kiancross.mandelbrot.ImageConfiguration$Builder" primary="true" start="142" end="142" startBytecode="2" endBytecode="2" sourcefile="ImageConfiguration.java" sourcepath="com/kiancross/mandelbrot/ImageConfiguration.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfiguration.java">
+      <Message>At ImageConfiguration.java:[line 142]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="EI_EXPOSE_REP" priority="2" rank="18" abbrev="EI" category="MALICIOUS_CODE" instanceHash="40eb590f6fdcb25113a58ae707afc425" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by returning reference to mutable object</ShortMessage>
+    <LongMessage>com.kiancross.mandelbrot.ImageConfigurationManager.getCurrentConfigurationProperty() may expose internal representation by returning ImageConfigurationManager.currentConfigurationProperty</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.ImageConfigurationManager" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfigurationManager" start="19" end="148" sourcefile="ImageConfigurationManager.java" sourcepath="com/kiancross/mandelbrot/ImageConfigurationManager.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfigurationManager.java">
+        <Message>At ImageConfigurationManager.java:[lines 19-148]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.ImageConfigurationManager</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.ImageConfigurationManager" name="getCurrentConfigurationProperty" signature="()Lcom/kiancross/mandelbrot/InformInitialObjectProperty;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfigurationManager" start="107" end="107" startBytecode="0" endBytecode="46" sourcefile="ImageConfigurationManager.java" sourcepath="com/kiancross/mandelbrot/ImageConfigurationManager.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfigurationManager.java"/>
+      <Message>In method com.kiancross.mandelbrot.ImageConfigurationManager.getCurrentConfigurationProperty()</Message>
+    </Method>
+    <Field classname="com.kiancross.mandelbrot.ImageConfigurationManager" name="currentConfigurationProperty" signature="Lcom/kiancross/mandelbrot/InformInitialObjectProperty;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.ImageConfigurationManager" sourcefile="ImageConfigurationManager.java" sourcepath="com/kiancross/mandelbrot/ImageConfigurationManager.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfigurationManager.java">
+        <Message>In ImageConfigurationManager.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.mandelbrot.ImageConfigurationManager.currentConfigurationProperty</Message>
+    </Field>
+    <SourceLine classname="com.kiancross.mandelbrot.ImageConfigurationManager" primary="true" start="107" end="107" startBytecode="4" endBytecode="4" sourcefile="ImageConfigurationManager.java" sourcepath="com/kiancross/mandelbrot/ImageConfigurationManager.java" relSourcepath="java/com/kiancross/mandelbrot/ImageConfigurationManager.java">
+      <Message>At ImageConfigurationManager.java:[line 107]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS" priority="1" rank="14" abbrev="Eq" category="BAD_PRACTICE" instanceHash="27a00b11eceaa43679d531d6515aadec" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Equals checks for incompatible operand</ShortMessage>
+    <LongMessage>com.kiancross.mandelbrot.SerializableColor.equals(Object) checks for operand being a javafx.scene.paint.Color</LongMessage>
+    <Class classname="com.kiancross.mandelbrot.SerializableColor" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.SerializableColor" start="32" end="103" sourcefile="SerializableColor.java" sourcepath="com/kiancross/mandelbrot/SerializableColor.java" relSourcepath="java/com/kiancross/mandelbrot/SerializableColor.java">
+        <Message>At SerializableColor.java:[lines 32-103]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.mandelbrot.SerializableColor</Message>
+    </Class>
+    <Method classname="com.kiancross.mandelbrot.SerializableColor" name="equals" signature="(Ljava/lang/Object;)Z" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.mandelbrot.SerializableColor" start="87" end="98" startBytecode="0" endBytecode="161" sourcefile="SerializableColor.java" sourcepath="com/kiancross/mandelbrot/SerializableColor.java" relSourcepath="java/com/kiancross/mandelbrot/SerializableColor.java"/>
+      <Message>In method com.kiancross.mandelbrot.SerializableColor.equals(Object)</Message>
+    </Method>
+    <Type descriptor="Ljavafx/scene/paint/Color;" role="TYPE_FOUND">
+      <SourceLine classname="javafx.scene.paint.Color" start="109" end="2004" sourcefile="Color.java" sourcepath="javafx/scene/paint/Color.java">
+        <Message>At Color.java:[lines 109-2004]</Message>
+      </SourceLine>
+      <Message>Actual type javafx.scene.paint.Color</Message>
+    </Type>
+    <SourceLine classname="com.kiancross.mandelbrot.SerializableColor" primary="true" start="91" end="91" startBytecode="19" endBytecode="19" sourcefile="SerializableColor.java" sourcepath="com/kiancross/mandelbrot/SerializableColor.java" relSourcepath="java/com/kiancross/mandelbrot/SerializableColor.java">
+      <Message>At SerializableColor.java:[line 91]</Message>
+    </SourceLine>
+    <SourceLine classname="com.kiancross.mandelbrot.SerializableColor" start="92" end="92" startBytecode="26" endBytecode="26" sourcefile="SerializableColor.java" sourcepath="com/kiancross/mandelbrot/SerializableColor.java" relSourcepath="java/com/kiancross/mandelbrot/SerializableColor.java" role="SOURCE_LINE_ANOTHER_INSTANCE">
+      <Message>Another occurrence at SerializableColor.java:[line 92]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UR_UNINIT_READ_CALLED_FROM_SUPER_CONSTRUCTOR" priority="1" rank="8" abbrev="UR" category="CORRECTNESS" instanceHash="9e406d969fc385febe539b3ff52d4eb1" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Uninitialized read of field method called from constructor of superclass</ShortMessage>
+    <LongMessage>defaultValue isn&apos;t initialized in com.kiancross.typedtextfield.DoubleTextField.getDefaultTypedValue() when invoked from constructor for superclass</LongMessage>
+    <Class classname="com.kiancross.typedtextfield.DoubleTextField" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" start="12" end="62" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java">
+        <Message>At DoubleTextField.java:[lines 12-62]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.typedtextfield.DoubleTextField</Message>
+    </Class>
+    <Method classname="com.kiancross.typedtextfield.DoubleTextField" name="getDefaultTypedValue" signature="()Ljava/lang/Double;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" start="52" end="52" startBytecode="0" endBytecode="49" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java"/>
+      <Message>In method com.kiancross.typedtextfield.DoubleTextField.getDefaultTypedValue()</Message>
+    </Method>
+    <Field classname="com.kiancross.typedtextfield.DoubleTextField" name="defaultValue" signature="D" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java">
+        <Message>In DoubleTextField.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.typedtextfield.DoubleTextField.defaultValue</Message>
+    </Field>
+    <Method classname="com.kiancross.typedtextfield.TypedTextField" name="&lt;init&gt;" signature="()V" isStatic="false" role="METHOD_SUPERCLASS_CONSTRUCTOR">
+      <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="65" end="74" startBytecode="0" endBytecode="126" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java"/>
+      <Message>Superclass constructor is new com.kiancross.typedtextfield.TypedTextField()</Message>
+    </Method>
+    <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="73" end="73" startBytecode="33" endBytecode="33" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java" role="SOURCE_LINE_CALLED_FROM_SUPERCLASS_AT">
+      <Message>Call from superclass constructor at TypedTextField.java:[line 73]</Message>
+    </SourceLine>
+    <Method classname="com.kiancross.typedtextfield.DoubleTextField" name="&lt;init&gt;" signature="(D)V" isStatic="false" role="METHOD_CONSTRUCTOR">
+      <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" start="24" end="26" startBytecode="0" endBytecode="69" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java"/>
+      <Message>Constructor is new com.kiancross.typedtextfield.DoubleTextField(double)</Message>
+    </Method>
+    <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" start="25" end="25" startBytecode="6" endBytecode="6" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java" role="SOURCE_LINE_FIELD_SET_TOO_LATE_AT">
+      <Message>Field set (too late) at DoubleTextField.java:[line 25]</Message>
+    </SourceLine>
+    <SourceLine classname="com.kiancross.typedtextfield.DoubleTextField" primary="true" start="52" end="52" startBytecode="1" endBytecode="1" sourcefile="DoubleTextField.java" sourcepath="com/kiancross/typedtextfield/DoubleTextField.java" relSourcepath="java/com/kiancross/typedtextfield/DoubleTextField.java">
+      <Message>At DoubleTextField.java:[line 52]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UR_UNINIT_READ_CALLED_FROM_SUPER_CONSTRUCTOR" priority="1" rank="8" abbrev="UR" category="CORRECTNESS" instanceHash="33b96a3d2be3930da8c4320b8564b6fa" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Uninitialized read of field method called from constructor of superclass</ShortMessage>
+    <LongMessage>defaultValue isn&apos;t initialized in com.kiancross.typedtextfield.IntegerTextField.getDefaultTypedValue() when invoked from constructor for superclass</LongMessage>
+    <Class classname="com.kiancross.typedtextfield.IntegerTextField" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" start="12" end="59" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java">
+        <Message>At IntegerTextField.java:[lines 12-59]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.typedtextfield.IntegerTextField</Message>
+    </Class>
+    <Method classname="com.kiancross.typedtextfield.IntegerTextField" name="getDefaultTypedValue" signature="()Ljava/lang/Integer;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" start="49" end="49" startBytecode="0" endBytecode="49" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java"/>
+      <Message>In method com.kiancross.typedtextfield.IntegerTextField.getDefaultTypedValue()</Message>
+    </Method>
+    <Field classname="com.kiancross.typedtextfield.IntegerTextField" name="defaultValue" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java">
+        <Message>In IntegerTextField.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.typedtextfield.IntegerTextField.defaultValue</Message>
+    </Field>
+    <Method classname="com.kiancross.typedtextfield.TypedTextField" name="&lt;init&gt;" signature="()V" isStatic="false" role="METHOD_SUPERCLASS_CONSTRUCTOR">
+      <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="65" end="74" startBytecode="0" endBytecode="126" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java"/>
+      <Message>Superclass constructor is new com.kiancross.typedtextfield.TypedTextField()</Message>
+    </Method>
+    <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="73" end="73" startBytecode="33" endBytecode="33" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java" role="SOURCE_LINE_CALLED_FROM_SUPERCLASS_AT">
+      <Message>Call from superclass constructor at TypedTextField.java:[line 73]</Message>
+    </SourceLine>
+    <Method classname="com.kiancross.typedtextfield.IntegerTextField" name="&lt;init&gt;" signature="(I)V" isStatic="false" role="METHOD_CONSTRUCTOR">
+      <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" start="24" end="26" startBytecode="0" endBytecode="69" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java"/>
+      <Message>Constructor is new com.kiancross.typedtextfield.IntegerTextField(int)</Message>
+    </Method>
+    <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" start="25" end="25" startBytecode="6" endBytecode="6" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java" role="SOURCE_LINE_FIELD_SET_TOO_LATE_AT">
+      <Message>Field set (too late) at IntegerTextField.java:[line 25]</Message>
+    </SourceLine>
+    <SourceLine classname="com.kiancross.typedtextfield.IntegerTextField" primary="true" start="49" end="49" startBytecode="1" endBytecode="1" sourcefile="IntegerTextField.java" sourcepath="com/kiancross/typedtextfield/IntegerTextField.java" relSourcepath="java/com/kiancross/typedtextfield/IntegerTextField.java">
+      <Message>At IntegerTextField.java:[line 49]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="EI_EXPOSE_REP" priority="2" rank="18" abbrev="EI" category="MALICIOUS_CODE" instanceHash="42bfd7550a7117a31d96a5136a3820e9" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by returning reference to mutable object</ShortMessage>
+    <LongMessage>com.kiancross.typedtextfield.TypedTextField.typedProperty() may expose internal representation by returning TypedTextField.typedProperty</LongMessage>
+    <Class classname="com.kiancross.typedtextfield.TypedTextField" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="59" end="203" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java">
+        <Message>At TypedTextField.java:[lines 59-203]</Message>
+      </SourceLine>
+      <Message>In class com.kiancross.typedtextfield.TypedTextField</Message>
+    </Class>
+    <Method classname="com.kiancross.typedtextfield.TypedTextField" name="typedProperty" signature="()Ljavafx/beans/value/WritableValue;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" start="180" end="180" startBytecode="0" endBytecode="64" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java"/>
+      <Message>In method com.kiancross.typedtextfield.TypedTextField.typedProperty()</Message>
+    </Method>
+    <Field classname="com.kiancross.typedtextfield.TypedTextField" name="typedProperty" signature="Ljavafx/beans/value/WritableValue;" isStatic="false" primary="true">
+      <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java">
+        <Message>In TypedTextField.java</Message>
+      </SourceLine>
+      <Message>Field com.kiancross.typedtextfield.TypedTextField.typedProperty</Message>
+    </Field>
+    <SourceLine classname="com.kiancross.typedtextfield.TypedTextField" primary="true" start="180" end="180" startBytecode="4" endBytecode="4" sourcefile="TypedTextField.java" sourcepath="com/kiancross/typedtextfield/TypedTextField.java" relSourcepath="java/com/kiancross/typedtextfield/TypedTextField.java">
+      <Message>At TypedTextField.java:[line 180]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="BAD_PRACTICE">
+    <Description>Bad practice</Description>
+  </BugCategory>
+  <BugCategory category="MALICIOUS_CODE">
+    <Description>Malicious code vulnerability</Description>
+  </BugCategory>
+  <BugCategory category="CORRECTNESS">
+    <Description>Correctness</Description>
+  </BugCategory>
+  <BugPattern type="EI_EXPOSE_REP2" abbrev="EI2" category="MALICIOUS_CODE" cweid="374">
+    <ShortDescription>May expose internal representation by incorporating reference to mutable object</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="EI_EXPOSE_REP" abbrev="EI" category="MALICIOUS_CODE" cweid="374">
+    <ShortDescription>May expose internal representation by returning reference to mutable object</ShortDescription>
+    <Details><![CDATA[
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS" abbrev="Eq" category="BAD_PRACTICE">
+    <ShortDescription>Equals checks for incompatible operand</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This equals method is checking to see if the argument is some incompatible type
+(i.e., a class that is neither a supertype nor subtype of the class that defines
+the equals method). For example, the Foo class might have an equals method
+that looks like:
+</p>
+<pre><code>public boolean equals(Object o) {
+    if (o instanceof Foo)
+        return name.equals(((Foo)o).name);
+    else if (o instanceof String)
+        return name.equals(o);
+    else return false;
+}
+</code></pre>
+
+<p>This is considered bad practice, as it makes it very hard to implement an equals method that
+is symmetric and transitive. Without those properties, very unexpected behaviors are possible.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="ICAST_BAD_SHIFT_AMOUNT" abbrev="BSHIFT" category="CORRECTNESS">
+    <ShortDescription>32 bit int shifted by an amount not in the range -31..31</ShortDescription>
+    <Details><![CDATA[
+
+<p>
+The code performs shift of a 32 bit int by a constant amount outside
+the range -31..31.
+The effect of this is to use the lower 5 bits of the integer
+value to decide how much to shift by (e.g., shifting by 40 bits is the same as shifting by 8 bits,
+and shifting by 32 bits is the same as shifting by zero bits). This probably isn't what was expected,
+and it is at least confusing.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="UR_UNINIT_READ_CALLED_FROM_SUPER_CONSTRUCTOR" abbrev="UR" category="CORRECTNESS">
+    <ShortDescription>Uninitialized read of field method called from constructor of superclass</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This method is invoked in the constructor of the superclass. At this point,
+    the fields of the class have not yet initialized.</p>
+<p>To make this more concrete, consider the following classes:</p>
+<pre><code>abstract class A {
+    int hashCode;
+    abstract Object getValue();
+
+    A() {
+        hashCode = getValue().hashCode();
+    }
+}
+
+class B extends A {
+    Object value;
+
+    B(Object v) {
+        this.value = v;
+    }
+
+    Object getValue() {
+        return value;
+    }
+}
+</code></pre>
+<p>When a <code>B</code> is constructed,
+the constructor for the <code>A</code> class is invoked
+<em>before</em> the constructor for <code>B</code> sets <code>value</code>.
+Thus, when the constructor for <code>A</code> invokes <code>getValue</code>,
+an uninitialized value is read for <code>value</code>.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="SA_FIELD_SELF_COMPUTATION" abbrev="SA" category="CORRECTNESS">
+    <ShortDescription>Nonsensical self computation involving a field (e.g., x &amp; x)</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method performs a nonsensical computation of a field with another
+reference to the same field (e.g., x&x or x-x). Because of the nature
+of the computation, this operation doesn't seem to make sense,
+and may indicate a typo or
+a logic error.  Double check the computation.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="BSHIFT">
+    <Description>Bad shift</Description>
+  </BugCode>
+  <BugCode abbrev="EI">
+    <Description>Method returning array may expose internal representation</Description>
+  </BugCode>
+  <BugCode abbrev="Eq">
+    <Description>Problems with implementation of equals()</Description>
+  </BugCode>
+  <BugCode abbrev="UR">
+    <Description>Uninitialized read of field in constructor</Description>
+  </BugCode>
+  <BugCode abbrev="SA">
+    <Description>Useless self-operation</Description>
+  </BugCode>
+  <BugCode abbrev="EI2">
+    <Description>Storing reference to mutable object</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Sun, 25 Jul 2021 13:13:25 +0100" total_classes="21" referenced_classes="387" total_bugs="10" total_size="941" num_packages="2" java_version="15.0.2" vm_version="15.0.2+7" cpu_seconds="10.59" clock_seconds="2.29" peak_mbytes="313.14" alloc_mbytes="512.00" gc_seconds="0.06" priority_2="7" priority_1="3">
+    <FileStats path="com/kiancross/mandelbrot/Bound.java" bugCount="0" size="29"/>
+    <FileStats path="com/kiancross/mandelbrot/ColorGradient.java" bugCount="0" size="42"/>
+    <FileStats path="com/kiancross/mandelbrot/ComplexNumber.java" bugCount="0" size="43"/>
+    <FileStats path="com/kiancross/mandelbrot/HistogramColorMapper.java" bugCount="1" size="39" bugHash="1e540aa8c9f6b9e7c27d45b0c1387ada"/>
+    <FileStats path="com/kiancross/mandelbrot/ImageConfiguration.java" bugCount="4" size="74" bugHash="55b54ee9ba5e84c5a07ff7a8994e9715"/>
+    <FileStats path="com/kiancross/mandelbrot/ImageConfigurationLoadException.java" bugCount="0" size="5"/>
+    <FileStats path="com/kiancross/mandelbrot/ImageConfigurationManager.java" bugCount="1" size="45" bugHash="698140242664cacd2649fc0bbaa98e49"/>
+    <FileStats path="com/kiancross/mandelbrot/ImageConfigurationSaveException.java" bugCount="0" size="5"/>
+    <FileStats path="com/kiancross/mandelbrot/ImageGenerator.java" bugCount="0" size="142"/>
+    <FileStats path="com/kiancross/mandelbrot/InformInitialObjectProperty.java" bugCount="0" size="8"/>
+    <FileStats path="com/kiancross/mandelbrot/Main.java" bugCount="0" size="6"/>
+    <FileStats path="com/kiancross/mandelbrot/MandelbrotSetIterationCountGenerator.java" bugCount="0" size="62"/>
+    <FileStats path="com/kiancross/mandelbrot/SerializableColor.java" bugCount="1" size="33" bugHash="d08e0f040a2e4990d17df2347303ff62"/>
+    <FileStats path="com/kiancross/mandelbrot/View.java" bugCount="0" size="290"/>
+    <FileStats path="com/kiancross/typedtextfield/DoubleTextField.java" bugCount="1" size="23" bugHash="7da2035486860fdca9c09f6f90b875b4"/>
+    <FileStats path="com/kiancross/typedtextfield/IntegerTextField.java" bugCount="1" size="23" bugHash="f1b26e391ab152d6b22475bd8b45c5ef"/>
+    <FileStats path="com/kiancross/typedtextfield/InvalidValueException.java" bugCount="0" size="8"/>
+    <FileStats path="com/kiancross/typedtextfield/TypedTextField.java" bugCount="1" size="62" bugHash="e3d2bd68b2745d58246cb2636dcc5ef2"/>
+    <FileStats path="com/kiancross/typedtextfield/Validator.java" bugCount="0" size="2"/>
+    <PackageStats package="com.kiancross.mandelbrot" total_bugs="7" total_types="16" total_size="823" priority_2="6" priority_1="1">
+      <ClassStats class="com.kiancross.mandelbrot.Bound" sourceFile="Bound.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.ColorGradient" sourceFile="ColorGradient.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.ComplexNumber" sourceFile="ComplexNumber.java" interface="false" size="43" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.HistogramColorMapper" sourceFile="HistogramColorMapper.java" interface="false" size="39" bugs="1" priority_2="1"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageConfiguration" sourceFile="ImageConfiguration.java" interface="false" size="42" bugs="3" priority_2="3"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageConfiguration$Builder" sourceFile="ImageConfiguration.java" interface="false" size="32" bugs="1" priority_2="1"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageConfigurationLoadException" sourceFile="ImageConfigurationLoadException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageConfigurationManager" sourceFile="ImageConfigurationManager.java" interface="false" size="45" bugs="1" priority_2="1"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageConfigurationSaveException" sourceFile="ImageConfigurationSaveException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.ImageGenerator" sourceFile="ImageGenerator.java" interface="false" size="142" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.InformInitialObjectProperty" sourceFile="InformInitialObjectProperty.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.Main" sourceFile="Main.java" interface="false" size="6" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.MandelbrotSetIterationCountGenerator" sourceFile="MandelbrotSetIterationCountGenerator.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.MandelbrotSetIterationCountGenerator$1" sourceFile="MandelbrotSetIterationCountGenerator.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="com.kiancross.mandelbrot.SerializableColor" sourceFile="SerializableColor.java" interface="false" size="33" bugs="1" priority_1="1"/>
+      <ClassStats class="com.kiancross.mandelbrot.View" sourceFile="View.java" interface="false" size="290" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="com.kiancross.typedtextfield" total_bugs="3" total_types="5" total_size="118" priority_2="1" priority_1="2">
+      <ClassStats class="com.kiancross.typedtextfield.DoubleTextField" sourceFile="DoubleTextField.java" interface="false" size="23" bugs="1" priority_1="1"/>
+      <ClassStats class="com.kiancross.typedtextfield.IntegerTextField" sourceFile="IntegerTextField.java" interface="false" size="23" bugs="1" priority_1="1"/>
+      <ClassStats class="com.kiancross.typedtextfield.InvalidValueException" sourceFile="InvalidValueException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="com.kiancross.typedtextfield.TypedTextField" sourceFile="TypedTextField.java" interface="false" size="62" bugs="1" priority_2="1"/>
+      <ClassStats class="com.kiancross.typedtextfield.Validator" sourceFile="Validator.java" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="516" invocations="2182" avgMicrosecondsPerInvocation="236" maxMicrosecondsPerInvocation="16024" standardDeviationMicrosecondsPerInvocation="795"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="187" invocations="387" avgMicrosecondsPerInvocation="483" maxMicrosecondsPerInvocation="14641" standardDeviationMicrosecondsPerInvocation="1242"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="183" invocations="387" avgMicrosecondsPerInvocation="475" maxMicrosecondsPerInvocation="11631" standardDeviationMicrosecondsPerInvocation="1051"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="90" invocations="785" avgMicrosecondsPerInvocation="115" maxMicrosecondsPerInvocation="1977" standardDeviationMicrosecondsPerInvocation="165"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="78" invocations="2188" avgMicrosecondsPerInvocation="35" maxMicrosecondsPerInvocation="657" standardDeviationMicrosecondsPerInvocation="37"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="59" invocations="177" avgMicrosecondsPerInvocation="338" maxMicrosecondsPerInvocation="13683" standardDeviationMicrosecondsPerInvocation="1054"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="58" invocations="169" avgMicrosecondsPerInvocation="344" maxMicrosecondsPerInvocation="2673" standardDeviationMicrosecondsPerInvocation="435"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="53" invocations="387" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="2093" standardDeviationMicrosecondsPerInvocation="249"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="53" invocations="2119" avgMicrosecondsPerInvocation="25" maxMicrosecondsPerInvocation="2054" standardDeviationMicrosecondsPerInvocation="80"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="47" invocations="186" avgMicrosecondsPerInvocation="255" maxMicrosecondsPerInvocation="7217" standardDeviationMicrosecondsPerInvocation="622"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="44" invocations="183" avgMicrosecondsPerInvocation="243" maxMicrosecondsPerInvocation="2441" standardDeviationMicrosecondsPerInvocation="293"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="43" invocations="496" avgMicrosecondsPerInvocation="87" maxMicrosecondsPerInvocation="1353" standardDeviationMicrosecondsPerInvocation="140"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="41" invocations="171" avgMicrosecondsPerInvocation="245" maxMicrosecondsPerInvocation="2536" standardDeviationMicrosecondsPerInvocation="353"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="40" invocations="177" avgMicrosecondsPerInvocation="229" maxMicrosecondsPerInvocation="1166" standardDeviationMicrosecondsPerInvocation="184"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="38" invocations="387" avgMicrosecondsPerInvocation="100" maxMicrosecondsPerInvocation="1761" standardDeviationMicrosecondsPerInvocation="198"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="32" invocations="387" avgMicrosecondsPerInvocation="84" maxMicrosecondsPerInvocation="1052" standardDeviationMicrosecondsPerInvocation="137"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="30" invocations="387" avgMicrosecondsPerInvocation="79" maxMicrosecondsPerInvocation="1263" standardDeviationMicrosecondsPerInvocation="151"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
