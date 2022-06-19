@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.module.ModuleDescriptor.Version;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class Parser {
   public Parser(InputStream input) throws ParserException {
     Document document = getDocument(input);
     root = document.getDocumentElement();
+
+    checkVersion(root);
 
     Element project = getElementByTagName(root, "Project");
     sourceDirectories = getSourceDirectories(project);
@@ -78,6 +81,24 @@ public class Parser {
     }
 
     return bugInstances;
+  }
+
+  private void checkVersion(Element bugCollection) throws ParserException {
+    if (!bugCollection.hasAttribute("version")) {
+      throw new ParserException("Missing `version` attribute on `BugCollection`.");
+    }
+
+    final Version version = Version.parse(bugCollection.getAttribute("version"));
+
+    if (
+        version.compareTo(Version.parse("4.0.0")) < 0
+        || version.compareTo(Version.parse("5.0.0")) >= 0
+    ) {
+      throw new ParserException(
+        "Unsupported SpotBugs version `%s`. Supported versions: 4.0.0 <= v < 5.0.0.",
+        version.toString()
+      );
+    }
   }
 
   private BugInstance getBugInstance(Element parent) throws ParserException {
