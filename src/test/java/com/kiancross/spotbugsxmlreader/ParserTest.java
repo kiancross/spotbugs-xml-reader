@@ -34,21 +34,22 @@ class ParserTest {
   @Test void duplicateBugCollectionThrows() {
     assertThrows(ParserException.class, () -> {
       new Parser(getTestInputStream(
-        "<BugCollection></BugCollection> <BugCollection></BugCollection>"
+        "<BugCollection version='4.5.0'></BugCollection>"
+        + "<BugCollection version='4.5.0'></BugCollection>"
       ));
     });
   }
   
   @Test void nonExistantProjectThrows() {
     assertThrows(ParserException.class, () -> {
-      new Parser(getTestInputStream("<BugCollection><foo></foo></BugCollection>"));
+      new Parser(getTestInputStream("<BugCollection version='4.5.0'><foo></foo></BugCollection>"));
     });
   }
   
   @Test void duplicateProjectThrows() {
     assertThrows(ParserException.class, () -> {
       new Parser(getTestInputStream(
-        "<BugCollection><Project></Project> <Project></Project></BugCollection>"
+        "<BugCollection version='4.5.0'><Project></Project> <Project></Project></BugCollection>"
       ));
     });
   }
@@ -56,7 +57,7 @@ class ParserTest {
   @Test void nonExistantSourcesThrows() {
     assertThrows(ParserException.class, () -> {
       new Parser(getTestInputStream(
-        "<BugCollection><Project> <foo></foo> </Project></BugCollection>"
+        "<BugCollection version='4.5.0'><Project> <foo></foo> </Project></BugCollection>"
       ));
     });
   }
@@ -64,7 +65,7 @@ class ParserTest {
   @Test void singleSourcesValid() {
     assertDoesNotThrow(() -> {
       new Parser(getTestInputStream(
-        "<BugCollection><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"
+        "<BugCollection version='4.5.0'><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"
       ));
     });
   }
@@ -72,7 +73,7 @@ class ParserTest {
   @Test void doubleSourcesValid() {
     assertDoesNotThrow(() -> {
       new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "<Project> <SrcDir>foo</SrcDir> <SrcDir>bar</SrcDir> </Project>"
         + "</BugCollection>"
       ));
@@ -81,7 +82,7 @@ class ParserTest {
   
   @Test void noBugsValid() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"
+        "<BugCollection version='4.5.0'><Project> <SrcDir>foo</SrcDir> </Project></BugCollection>"
     ));
 
     assertEquals(0, parser.getBugInstances().size());
@@ -89,7 +90,7 @@ class ParserTest {
   
   @Test void oneBugValid() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='2' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
@@ -111,7 +112,7 @@ class ParserTest {
   
   @Test void noPrimaryThrows() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='2' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
@@ -129,7 +130,7 @@ class ParserTest {
   
   @Test void invalidPriorityThrows() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='bad' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
@@ -147,7 +148,7 @@ class ParserTest {
   
   @Test void invalidStartThrows() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='foo' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
@@ -165,7 +166,7 @@ class ParserTest {
   
   @Test void invalidStartBytecodeThrows() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='foo' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
@@ -183,11 +184,11 @@ class ParserTest {
   
   @Test void invalidRelSourcepathThrows() throws ParserException {
     final Parser parser = new Parser(getTestInputStream(
-        "<BugCollection>"
+        "<BugCollection version='4.5.0'>"
         + "  <Project> <SrcDir>foo</SrcDir> </Project>"
         + "  <BugInstance priority='foo' category='bar'>"
         + "    <LongMessage>bat</LongMessage>"
-        + "    <SourceLine primary='true' start='11' startBytecode='bad' relSourcepath='bar'>"
+        + "    <SourceLine primary='true' start='11' startBytecode='10' relSourcepath='bar'>"
         + "      <Message>bat</Message>"
         + "    </SourceLine>"
         + "  </BugInstance>"
@@ -196,6 +197,38 @@ class ParserTest {
 
     assertThrows(ParserException.class, () -> {
       parser.getBugInstances();
+    });
+  }
+
+  @Test void versionLowThrows() throws ParserException {
+    assertThrows(ParserException.class, () -> {
+      new Parser(getTestInputStream(
+          "<BugCollection version='3.9.9'>"
+          + "  <Project> <SrcDir>foo</SrcDir> </Project>"
+          + "  <BugInstance priority='2' category='bar'>"
+          + "    <LongMessage>bat</LongMessage>"
+          + "    <SourceLine primary='true' start='35' startBytecode='11' relSourcepath='foo'>"
+          + "      <Message>bat</Message>"
+          + "    </SourceLine>"
+          + "  </BugInstance>"
+          + "</BugCollection>"
+      ));
+    });
+  }
+
+  @Test void versionHighThrows() throws ParserException {
+    assertThrows(ParserException.class, () -> {
+      new Parser(getTestInputStream(
+          "<BugCollection version='5.0.0'>"
+          + "  <Project> <SrcDir>foo</SrcDir> </Project>"
+          + "  <BugInstance priority='2' category='bar'>"
+          + "    <LongMessage>bat</LongMessage>"
+          + "    <SourceLine primary='true' start='35' startBytecode='11' relSourcepath='foo'>"
+          + "      <Message>bat</Message>"
+          + "    </SourceLine>"
+          + "  </BugInstance>"
+          + "</BugCollection>"
+      ));
     });
   }
 }
