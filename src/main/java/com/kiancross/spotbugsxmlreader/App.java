@@ -73,7 +73,7 @@ public class App {
    *
    * @param args Arguments passed from command line.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     CommandLineInterface cli = new CommandLineInterface();
 
     try {
@@ -81,20 +81,19 @@ public class App {
       cli.parse(args);
 
       if (handleAlternateFlags(cli)) {
-        System.exit(0);
+        return;
       }
 
-      System.exit(handleMainProgramme(cli) ? 0 : 1);
+      if (handleMainProgramme(cli)) {
+        return;
+      }
 
     } catch (CommandLineInterfaceException e) {
       System.err.println(e.getMessage());
       System.out.println("");
       cli.printHelp();
-
-    } catch (Exception e) {
-      System.err.println(e.getMessage());
     }
       
-    System.exit(1);
+    throw new Exception();
   }
 }
