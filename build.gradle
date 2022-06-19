@@ -31,7 +31,46 @@ jacocoTestReport {
   }
 }
 
-def version = rootProject.file("config/version.txt").text.trim()
+def getGitTag = { ->
+  def stdout = new ByteArrayOutputStream()
+
+  exec {
+    commandLine 'git', 'tag', '--points-at', 'HEAD'
+    ignoreExitValue true
+    standardOutput = stdout
+  }
+
+  return stdout.toString().trim()
+}
+
+// https://stackoverflow.com/a/35041457
+def getGitHash = { ->
+  def stdout = new ByteArrayOutputStream()
+
+  exec {
+    commandLine 'git', 'rev-parse', '--short', 'HEAD'
+    ignoreExitValue true
+    standardOutput = stdout
+  }
+
+  return stdout.toString().trim()
+}
+
+def getVersion = { ->
+  def tag = getGitTag()
+  if (tag.startsWith("v")) {
+    return tag
+  }
+
+  def hash = getGitHash()
+  if (!hash.equals("")) {
+    return hash
+  }
+
+  return "unknown"
+}
+
+def version = getVersion()
 
 shadowJar {
   minimize()
@@ -40,9 +79,13 @@ shadowJar {
   archiveVersion.set(version)
 }
 
-tasks.register("createProperties", Copy) {
-  from "config/version.txt"
-  into layout.buildDirectory.dir("resources/main")
+tasks.register("createProperties") {
+  doLast {
+    mkdir "$buildDir/resources/main/"
+    def f = file("$buildDir/resources/main/version.txt")
+    f.createNewFile()
+    f.text = version
+  }
 }
 
 classes {
